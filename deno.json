@@ -1,0 +1,63 @@
+{
+  "nodeModulesDir": "manual",
+  "tasks": {
+    "check": "deno fmt --check . && deno lint . && deno check",
+    "dev": "vite",
+    "build": "vite build",
+    "start": "deno serve -A _fresh/server.js"
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
+  "imports": {
+    "@/": "./",
+    "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
+    "@mistralai/mistralai": "npm:@mistralai/mistralai@^1.10.0",
+    "@preact/signals": "npm:@preact/signals@^2.3.2",
+    "@std/encoding": "jsr:@std/encoding@^1.0.10",
+    "@std/tar": "jsr:@std/tar@^0.1.9",
+    "fresh": "jsr:@fresh/core@^2.1.4",
+    "marked": "npm:marked@^16.4.1",
+    "marked-footnote": "npm:marked-footnote@^1.4.0",
+    "marked-katex-extension": "npm:marked-katex-extension@^5.1.5",
+    "preact": "npm:preact@^10.27.2",
+    "vite": "npm:rolldown-vite@^7.1.20"
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "dom.iterable",
+      "deno.ns"
+    ],
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head",
+      "title",
+      "meta",
+      "script",
+      "link",
+      "style",
+      "base",
+      "noscript",
+      "template"
+    ],
+    "types": [
+      "vite/client"
+    ]
+  }
+}
