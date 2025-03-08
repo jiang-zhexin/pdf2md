@@ -2,24 +2,24 @@
   "name": "pdf2md",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "wrangler pages dev",
+    "deploy": "npm run build && wrangler pages deploy",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@mistralai/mistralai": "^1.5.1",
     "hono": "^4.7.4",
-    "rehype-mathjax": "^7.1.0",
-    "rehype-stringify": "^10.0.1",
-    "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.1",
-    "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0"
+    "marked": "^15.0.7",
+    "marked-footnote": "^1.2.4",
+    "marked-katex-extension": "^5.1.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
+    "@hono/vite-build": "^1.2.0",
+    "@hono/vite-dev-server": "^0.18.2",
+    "vite": "^6.1.1",
     "wrangler": "^3.109.2"
   }
 }

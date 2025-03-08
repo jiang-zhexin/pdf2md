@@ -1,12 +1,21 @@
 import { OCRResponse } from "@mistralai/mistralai/models/components";
-import rehypeMathjax from "rehype-mathjax";
-import rehypeStringify from "rehype-stringify";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import { visit } from "unist-util-visit";
+import { marked } from "marked";
+import markedKatex from "marked-katex-extension";
+import markedFootnote from "marked-footnote";
+
+marked.use(markedFootnote());
+marked.use(
+  markedKatex({
+    throwOnError: false,
+    nonStandard: true,
+    output: "mathml",
+  })
+);
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+  pedantic: false,
+});
 
 export async function Ocr2html({ ocrResponse }: { ocrResponse: OCRResponse }) {
   const result = await ocr2html(ocrResponse);
@@ -19,39 +28,28 @@ export async function ocr2html(ocrResponse: OCRResponse): Promise<string> {
   const markdown = ocrResponse.pages.map((p) => p.markdown).join("\n\n");
   const images = ocrResponse.pages.map((p) => p.images).flat(2);
   const imageMap = arrayToRecord(images);
-  const result = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkMath)
-    .use(() => {
-      return (tree) => {
-        visit(tree, "image", (node: { url: string }) => {
-          if (node.url && imageMap[node.url]) {
-            node.url = imageMap[node.url].imageBase64!;
-          }
-        });
-      };
-    })
-    .use(remarkRehype)
-    .use(rehypeMathjax)
-    .use(() => {
-      return (tree) => {
-        visit(tree, "element", (node: any, index, parent) => {
-          if (node.tagName === "table" && parent && typeof index === "number") {
-            const figure = {
-              type: "element",
-              tagName: "figure",
-              properties: {},
-              children: [node],
-            };
-            parent.children[index] = figure;
-          }
-        });
-      };
-    })
-    .use(rehypeStringify)
-    .process(markdown);
-  return String(result);
+
+  const renderer = new marked.Renderer();
+
+  renderer.image = function ({ href, title, text }) {
+    if (href === null) {
+      return text;
+    }
+    const imageInfo = imageMap[href];
+    if (imageInfo) {
+      const base64 = imageInfo.imageBase64;
+      return `<img src="${base64}" alt="${text}" title="${title || ""}" />`;
+    }
+    return `<img src="${href}" alt="${text}" title="${title || ""}" />`;
+  };
+
+  const originalTable = renderer.table;
+  renderer.table = function (token) {
+    const tableHtml = originalTable.call(this, token);
+    return `<figure>${tableHtml}</figure>`;
+  };
+
+  return marked.parse(markdown, { renderer });
 }
 
 function arrayToRecord<T extends { id: string }>(arr: T[]): Record<string, T> {
