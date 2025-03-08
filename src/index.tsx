@@ -57,7 +57,12 @@ app.get("/", (c) => {
       </p>
     </>,
     {
-      title: <h1>PDF To Markdown</h1>,
+      title: (
+        <h1>
+          <img class="icon" src="/assets/icon.svg" />
+          PDF To Markdown
+        </h1>
+      ),
     }
   );
 });

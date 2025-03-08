@@ -13,6 +13,8 @@ export const Layout = jsxRenderer(
             href="https://cdn.simplecss.org/simple.min.css"
           />
           <link rel="stylesheet" href="/assets/css/style.css" />
+          <link rel="icon" href="/assets/icon.svg" />
+          <link rel="apple-touch-icon" href="/assets/icon.svg" />
         </head>
         <body>{children}</body>
       </html>
