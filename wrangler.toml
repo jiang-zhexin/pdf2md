@@ -1,0 +1,13 @@
+name = "pdf2md"
+main = "src/index.tsx"
+compatibility_date = "2025-03-06"
+minify = true
+upload_source_maps = true
+workers_dev = false
+preview_urls = false
+
+[assets]
+directory = "./public/"
+
+[ai]
+binding = "AI"
