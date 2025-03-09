@@ -1,12 +1,12 @@
 import { Hono } from "hono";
 import { Layout } from "../renderer";
-import { demoData } from "./demo";
 import { Ocr2html } from "../../utils/ocr2html";
 import { Suspense } from "hono/jsx/streaming";
 import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
+import demoData from "./demo.json";
 
-const demo = new Hono().basePath("/demo");
+const demo = new Hono<{ Bindings: Env }>().basePath("/demo");
 
 demo.use(Layout);
 
