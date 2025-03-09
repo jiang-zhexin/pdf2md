@@ -1,9 +1,18 @@
 import { Hono } from "hono";
+import { cache } from "hono/cache";
 import { Header, Layout } from "./renderer";
 import demo from "./demo";
 import pdf from "./pdf";
 
 const app = new Hono<{ Bindings: Env }>();
+
+app.get(
+  "*",
+  cache({
+    cacheName: "2025-03-06",
+    cacheControl: "public, max-age=86400",
+  })
+);
 
 app.route("/", demo);
 app.route("/", pdf);
