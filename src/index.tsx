@@ -45,7 +45,9 @@ app.get("/", (c) => {
       </p>
 
       <h3>OK, I get it.</h3>
-      <a class="button">Let's try it now!</a>
+      <a class="button" href="/pdf">
+        Let's try it now!
+      </a>
 
       <h3>More information</h3>
       <p>
