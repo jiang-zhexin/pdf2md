@@ -32,15 +32,12 @@ export async function ocr2html(ocrResponse: OCRResponse): Promise<string> {
   const renderer = new marked.Renderer();
 
   renderer.image = function ({ href, title, text }) {
-    if (href === null) {
-      return text;
-    }
     const imageInfo = imageMap[href];
-    if (imageInfo) {
-      const base64 = imageInfo.imageBase64;
-      return `<img src="${base64}" alt="${text}" title="${title || ""}" />`;
+    if (!imageInfo) {
+      return `<img src="${href}" alt="${text}" title="${title || ""}" />`;
     }
-    return `<img src="${href}" alt="${text}" title="${title || ""}" />`;
+    const base64 = imageInfo.imageBase64;
+    return `<img src="${base64}" alt="${text}" title="${title || ""}" />`;
   };
 
   const originalTable = renderer.table;
