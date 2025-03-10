@@ -1,7 +1,9 @@
 name = "pdf2md"
 compatibility_date = "2025-03-06"
 pages_build_output_dir = "./dist"
-upload_source_maps = true
 
 [ai]
 binding = "AI"
+
+[placement]
+mode = "smart"
