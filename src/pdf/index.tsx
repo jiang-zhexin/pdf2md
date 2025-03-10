@@ -5,7 +5,13 @@ import { createClient, ParseByUrl, UploadFile } from "./utils";
 import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
 
-const pdf = new Hono<{ Bindings: Env }>().basePath("/pdf");
+type Variables = {
+  url?: string;
+};
+
+const pdf = new Hono<{ Bindings: Env; Variables: Variables }>().basePath(
+  "/pdf"
+);
 
 pdf.use(Layout);
 
@@ -19,7 +25,7 @@ pdf.get("/", async (c) => {
       <main>
         <h5>You can start with</h5>
         <article>
-          <form method="post" encType="multipart/form-data" action="/pdf/url">
+          <form action="/pdf/url">
             <label htmlFor="pdfUrl">Type the pdf's URL:</label>
             <br />
             <textarea
@@ -60,9 +66,19 @@ pdf.get("/", async (c) => {
   );
 });
 
-pdf.post("/url", async (c) => {
+pdf.get("/url", async (c, next) => {
+  c.set("url", c.req.query("pdfUrl"));
+  await next();
+});
+
+pdf.post("/url", async (c, next) => {
   const data = await c.req.formData();
-  const pdfUrl = data.get("pdfUrl")?.toString();
+  c.set("url", data.get("pdfUrl")?.toString());
+  await next();
+});
+
+pdf.on(["GET", "POST"], "/url", async (c) => {
+  const pdfUrl = c.get("url");
   if (!pdfUrl) {
     return c.redirect("/pdf");
   }
