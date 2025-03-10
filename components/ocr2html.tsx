@@ -4,6 +4,7 @@ import markedKatex from "marked-katex-extension";
 import markedFootnote from "marked-footnote";
 
 marked.use(markedFootnote());
+
 marked.use(
   markedKatex({
     throwOnError: false,
@@ -11,6 +12,7 @@ marked.use(
     output: "mathml",
   })
 );
+
 marked.setOptions({
   gfm: true,
   breaks: true,
@@ -18,13 +20,6 @@ marked.setOptions({
 });
 
 export async function Ocr2html({ ocrResponse }: { ocrResponse: OCRResponse }) {
-  const result = await ocr2html(ocrResponse);
-  return (
-    <div class="markdown-body" dangerouslySetInnerHTML={{ __html: result }} />
-  );
-}
-
-export async function ocr2html(ocrResponse: OCRResponse): Promise<string> {
   const markdown = ocrResponse.pages.map((p) => p.markdown).join("\n\n");
   const images = ocrResponse.pages.map((p) => p.images).flat(2);
   const imageMap = arrayToRecord(images);
@@ -46,7 +41,9 @@ export async function ocr2html(ocrResponse: OCRResponse): Promise<string> {
     return `<figure>${tableHtml}</figure>`;
   };
 
-  return marked.parse(markdown, { renderer });
+  const result = await marked.parse(markdown, { renderer });
+
+  return <div dangerouslySetInnerHTML={{ __html: result }} />;
 }
 
 function arrayToRecord<T extends { id: string }>(arr: T[]): Record<string, T> {

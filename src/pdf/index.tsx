@@ -1,9 +1,10 @@
 import { Hono } from "hono";
-import { Suspense } from "hono/jsx/streaming";
-import { Layout } from "../renderer";
-import { createClient, ParseByUrl, UploadFile } from "./utils";
+import { Mistral } from "@mistralai/mistralai";
+import { HTTPClient } from "@mistralai/mistralai/lib/http";
 import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
+import { Url } from "../../components/ocr/url";
+import { Direct } from "../../components/ocr/direct";
 
 type Variables = {
   url?: string;
@@ -12,8 +13,6 @@ type Variables = {
 const pdf = new Hono<{ Bindings: Env; Variables: Variables }>().basePath(
   "/pdf"
 );
-
-pdf.use(Layout);
 
 pdf.get("/", async (c) => {
   return c.render(
@@ -90,9 +89,7 @@ pdf.on(["GET", "POST"], "/url", async (c) => {
         <h1>PDF To Markdown</h1>
       </header>
       <main>
-        <Suspense fallback={<p>OCRing...</p>}>
-          <ParseByUrl client={client} pdfUrl={pdfUrl} />
-        </Suspense>
+        <Url client={client} pdfUrl={pdfUrl} />
       </main>
       <Footer />
     </>
@@ -114,9 +111,7 @@ pdf.post("/direct", async (c) => {
         <h1>PDF To Markdown</h1>
       </header>
       <main>
-        <Suspense fallback={<p>Uploading file to server...</p>}>
-          <UploadFile client={client} pdfFile={pdfFile}></UploadFile>
-        </Suspense>
+        <Direct client={client} pdfFile={pdfFile} />
       </main>
       <Footer />
     </>
@@ -124,3 +119,24 @@ pdf.post("/direct", async (c) => {
 });
 
 export default pdf;
+
+function createClient(env: Env) {
+  return new Mistral({
+    apiKey: env.MISTRAL_API_KEY,
+    httpClient: new HTTPClient({
+      fetcher: async (input, init): Promise<Response> => {
+        const req = new Request(input, init);
+        if (req.url.startsWith("https://api.mistral.ai/v1/files")) {
+          return fetch(req);
+        }
+        const endpoint = req.url.split("/").pop()!;
+        return env.AI.gateway("pdf2md").run({
+          provider: "mistral",
+          endpoint: endpoint,
+          headers: Object.fromEntries(req.headers.entries()),
+          query: await req.json(),
+        });
+      },
+    }),
+  });
+}

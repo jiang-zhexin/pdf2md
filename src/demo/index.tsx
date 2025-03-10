@@ -1,14 +1,11 @@
 import { Hono } from "hono";
-import { Layout } from "../renderer";
-import { demoData } from "./demo";
-import { Ocr2html } from "../../utils/ocr2html";
 import { Suspense } from "hono/jsx/streaming";
+import { demoData } from "./demo";
+import { Ocr2html } from "../../components/ocr2html";
 import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
 
 const demo = new Hono().basePath("/demo");
-
-demo.use(Layout);
 
 demo.get("/", async (c) => {
   return c.render(

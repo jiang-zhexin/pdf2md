@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Layout } from "./renderer";
+import { Layout } from "./layout";
 import demo from "./demo";
 import pdf from "./pdf";
 import { Nav } from "../components/nav";
@@ -7,10 +7,10 @@ import { Footer } from "../components/footer";
 
 const app = new Hono<{ Bindings: Env }>();
 
+app.use(Layout);
+
 app.route("/", demo);
 app.route("/", pdf);
-
-app.use(Layout);
 
 app.get("/", (c) => {
   return c.render(
