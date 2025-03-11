@@ -28,8 +28,8 @@ app.get("/", (c) => {
         <p>
           A user-friendly front-end interface showcasing the powerful
           capabilities of <code>mistral-ocr-latest</code> and enables you to
-          extract text and structured content from PDF documents by OCR (Optical
-          Character Recognition).
+          extract text and structured content from <u>English Paper</u> (.pdf)
+          by OCR (Optical Character Recognition).
         </p>
         <b>Key features:</b>
         <ul>
