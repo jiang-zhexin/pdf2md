@@ -39,7 +39,7 @@ pdf.get("/", async (c) => {
             />
             <br />
             <button type="submit">submit</button>
-          </form>{" "}
+          </form>
         </article>
         <h5>or</h5>
         <article>

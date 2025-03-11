@@ -66,7 +66,10 @@ app.get("/", (c) => {
         <h3>More information</h3>
         <p>
           You can refer to the{" "}
-          <a href="https://docs.mistral.ai/capabilities/document/">
+          <a
+            target="_blank"
+            href="https://docs.mistral.ai/capabilities/document/"
+          >
             mistral documentation
           </a>{" "}
           for more information.
