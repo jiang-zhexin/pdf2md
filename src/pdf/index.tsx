@@ -6,6 +6,7 @@ import { Footer } from "../../components/footer";
 import { Url } from "../../components/ocr/url";
 import { Direct } from "../../components/ocr/direct";
 import { Download } from "../../components/download";
+import { ErrorBoundary } from "hono/jsx";
 
 type Variables = {
   url?: string;
@@ -94,10 +95,20 @@ pdf.on(["GET", "POST"], "/url", async (c) => {
       <header>
         <Nav />
         <h1>PDF To Markdown</h1>
-        <Download idPromise={idPromise} />
+        <ErrorBoundary>
+          <Download idPromise={idPromise} />
+        </ErrorBoundary>
       </header>
       <main>
-        <Url client={client} pdfUrl={pdfUrl} />
+        <ErrorBoundary
+          fallback={
+            <p class="notice">
+              It seems that it cannot be parsed. Is the English paper you gave?
+            </p>
+          }
+        >
+          <Url client={client} pdfUrl={pdfUrl} />
+        </ErrorBoundary>
       </main>
       <Footer />
     </>
@@ -116,17 +127,27 @@ pdf.post("/direct", async (c) => {
     resolve,
     reject,
   } = Promise.withResolvers<string>();
-  setTimeout(reject, 60000);
+  setTimeout(reject, 15000);
   const client = createClient(c.env, resolve);
   return c.render(
     <>
       <header>
         <Nav />
         <h1>PDF To Markdown</h1>
-        <Download idPromise={idPromise} />
+        <ErrorBoundary>
+          <Download idPromise={idPromise} />
+        </ErrorBoundary>
       </header>
       <main>
-        <Direct client={client} pdfFile={pdfFile} />
+        <ErrorBoundary
+          fallback={
+            <p class="notice">
+              It seems that it cannot be parsed. Is the English paper you gave?
+            </p>
+          }
+        >
+          <Direct client={client} pdfFile={pdfFile} />
+        </ErrorBoundary>
       </main>
       <Footer />
     </>
