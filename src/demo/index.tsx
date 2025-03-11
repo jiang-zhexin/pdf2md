@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { Suspense } from "hono/jsx/streaming";
-import { demoData } from "./demo";
+import demoData from "./data.json";
 import { Ocr2html } from "../../components/ocr2html";
 import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
