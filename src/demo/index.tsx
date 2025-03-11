@@ -14,11 +14,9 @@ demo.get("/", async (c) => {
         <Nav />
         <h1>DEMO</h1>
         <p>
-          You can find original paper{" "}
           <a target="_blank" href="https://arxiv.org/pdf/2201.04234">
-            here
+            You can find original paper here.
           </a>
-          .
         </p>
       </header>
       <main>

@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { Layout } from "./layout";
 import demo from "./demo";
 import pdf from "./pdf";
+import md from "./md";
 import { Nav } from "../components/nav";
 import { Footer } from "../components/footer";
 
@@ -11,6 +12,7 @@ app.use(Layout);
 
 app.route("/", demo);
 app.route("/", pdf);
+app.route("/", md);
 
 app.get("/", (c) => {
   return c.render(

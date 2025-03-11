@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "@mistralai/mistralai": "^1.5.1",
+    "@std/encoding": "npm:@jsr/std__encoding",
+    "@std/tar": "npm:@jsr/std__tar",
     "hono": "^4.7.4",
     "marked": "^15.0.7",
     "marked-footnote": "^1.2.4",
     "marked-katex-extension": "^5.1.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250303.0",
+    "@cloudflare/workers-types": "^4.20250310.0",
     "@hono/vite-build": "^1.3.0",
     "@hono/vite-dev-server": "^0.18.3",
     "vite": "^6.2.1",

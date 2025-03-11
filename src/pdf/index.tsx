@@ -5,6 +5,7 @@ import { Nav } from "../../components/nav";
 import { Footer } from "../../components/footer";
 import { Url } from "../../components/ocr/url";
 import { Direct } from "../../components/ocr/direct";
+import { Download } from "../../components/download";
 
 type Variables = {
   url?: string;
@@ -81,12 +82,19 @@ pdf.on(["GET", "POST"], "/url", async (c) => {
   if (!pdfUrl) {
     return c.redirect("/pdf");
   }
-  const client = createClient(c.env);
+  const {
+    promise: idPromise,
+    resolve,
+    reject,
+  } = Promise.withResolvers<string>();
+  setTimeout(reject, 10000);
+  const client = createClient(c.env, resolve);
   return c.render(
     <>
       <header>
         <Nav />
         <h1>PDF To Markdown</h1>
+        <Download idPromise={idPromise} />
       </header>
       <main>
         <Url client={client} pdfUrl={pdfUrl} />
@@ -103,12 +111,19 @@ pdf.post("/direct", async (c) => {
   if (!pdfFile || typeof pdfFile === "string") {
     return c.redirect("/pdf");
   }
-  const client = createClient(c.env);
+  const {
+    promise: idPromise,
+    resolve,
+    reject,
+  } = Promise.withResolvers<string>();
+  setTimeout(reject, 60000);
+  const client = createClient(c.env, resolve);
   return c.render(
     <>
       <header>
         <Nav />
         <h1>PDF To Markdown</h1>
+        <Download idPromise={idPromise} />
       </header>
       <main>
         <Direct client={client} pdfFile={pdfFile} />
@@ -120,7 +135,7 @@ pdf.post("/direct", async (c) => {
 
 export default pdf;
 
-function createClient(env: Env) {
+function createClient(env: Env, resolve: (value: string) => void) {
   return new Mistral({
     apiKey: env.MISTRAL_API_KEY,
     httpClient: new HTTPClient({
@@ -130,12 +145,15 @@ function createClient(env: Env) {
           return fetch(req);
         }
         const endpoint = req.url.split("/").pop()!;
-        return env.AI.gateway("pdf2md").run({
+        const res = await env.AI.gateway("pdf2md").run({
           provider: "mistral",
           endpoint: endpoint,
           headers: Object.fromEntries(req.headers.entries()),
           query: await req.json(),
         });
+        const aiGatewayLogId = res.headers.get("cf-aig-log-id");
+        if (aiGatewayLogId) resolve(aiGatewayLogId);
+        return res;
       },
     }),
   });
