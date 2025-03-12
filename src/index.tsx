@@ -10,6 +10,23 @@ const app = new Hono<{ Bindings: Env }>();
 
 app.use(Layout);
 
+app.notFound((c) => {
+  return c.render(
+    <>
+      <header>
+        <Nav />
+        <h1>
+          <img class="icon" src="/assets/icon.svg" />
+          PDF To Markdown
+        </h1>
+        <p>
+          Not found the page. Go back to <a href="/">home</a>.
+        </p>
+      </header>
+    </>
+  );
+});
+
 app.route("/", demo);
 app.route("/", pdf);
 app.route("/", md);
