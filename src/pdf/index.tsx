@@ -8,13 +8,7 @@ import { Direct } from "../../components/ocr/direct";
 import { Download } from "../../components/download";
 import { ErrorBoundary } from "hono/jsx";
 
-type Variables = {
-  url?: string;
-};
-
-const pdf = new Hono<{ Bindings: Env; Variables: Variables }>().basePath(
-  "/pdf"
-);
+const pdf = new Hono<{ Bindings: Env }>().basePath("/pdf");
 
 pdf.get("/", async (c) => {
   return c.render(
@@ -67,19 +61,8 @@ pdf.get("/", async (c) => {
   );
 });
 
-pdf.get("/url", async (c, next) => {
-  c.set("url", c.req.query("pdfUrl"));
-  await next();
-});
-
-pdf.post("/url", async (c, next) => {
-  const data = await c.req.formData();
-  c.set("url", data.get("pdfUrl")?.toString());
-  await next();
-});
-
-pdf.on(["GET", "POST"], "/url", async (c) => {
-  const pdfUrl = c.get("url");
+pdf.get("/url", async (c) => {
+  const pdfUrl = c.req.query("pdfUrl");
   if (!pdfUrl) {
     return c.redirect("/pdf");
   }
