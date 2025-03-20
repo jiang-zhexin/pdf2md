@@ -14,7 +14,6 @@ export async function UploadFile({
       fileName: pdfFile.name,
       content: pdfFile,
     },
-    // @ts-ignore
     purpose: "ocr",
   });
 
