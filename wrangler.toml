@@ -1,9 +1,16 @@
 name = "pdf2md"
-compatibility_date = "2025-03-06"
-pages_build_output_dir = "./dist"
+main = "src/index.tsx"
+compatibility_date = "2025-06-14"
+minify = true
+upload_source_maps = true
+workers_dev = false
+preview_urls = false
+
+[assets]
+directory = "./public/"
+
+[observability]
+enabled = true
 
 [ai]
 binding = "AI"
-
-[placement]
-mode = "smart"
