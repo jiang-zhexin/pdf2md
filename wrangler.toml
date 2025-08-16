@@ -1,6 +1,7 @@
+#:schema node_modules/wrangler/config-schema.json
 name = "pdf2md"
 main = "src/index.tsx"
-compatibility_date = "2025-06-14"
+compatibility_date = "2025-08-15"
 minify = true
 upload_source_maps = true
 workers_dev = false

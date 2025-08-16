@@ -1,21 +1,17 @@
 {
   "name": "pdf2md",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "cf-typegen": "wrangler types"
-  },
   "dependencies": {
-    "@mistralai/mistralai": "^1.7.2",
+    "@mistralai/mistralai": "^1.7.5",
     "@std/encoding": "npm:@jsr/std__encoding",
     "@std/tar": "npm:@jsr/std__tar",
-    "hono": "^4.7.11",
+    "hono": "^4.9.2",
     "marked": "^15.0.12",
-    "marked-footnote": "^1.2.4",
-    "marked-katex-extension": "^5.1.4"
+    "marked-footnote": "^1.4.0",
+    "marked-katex-extension": "^5.1.5"
   },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250614.0",
-    "wrangler": "^4.20.0"
+  "scripts": {
+    "dev": "bun x wrangler dev",
+    "deploy": "bun x wrangler deploy",
+    "types": "bun x wrangler types"
   }
 }
