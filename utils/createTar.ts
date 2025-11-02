@@ -31,7 +31,9 @@ export function createTar(ocrResponse: OCRResponse, name: string) {
 
       controller.close();
     },
-  }).pipeThrough(new TarStream());
+  })
+    .pipeThrough(new TarStream())
+    .pipeThrough(new CompressionStream("gzip"));
 
   return tar;
 }

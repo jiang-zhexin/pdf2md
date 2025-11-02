@@ -18,7 +18,7 @@ export function DownloadMD(props: {
         const url = URL.createObjectURL(await new Response(c).blob());
         const a = document.createElement("a");
         a.href = url;
-        a.download = `${props.name}.tar`;
+        a.download = `${props.name}.tar.gz`;
         a.click();
         URL.revokeObjectURL(url);
       }}
