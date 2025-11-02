@@ -1,3 +1,4 @@
+import { keyBy } from "@es-toolkit/es-toolkit";
 import type { OCRResponse } from "@mistralai/mistralai/models/components";
 import { marked } from "marked";
 import markedKatex from "marked-katex-extension";
@@ -22,7 +23,7 @@ marked.setOptions({
 export function Ocr2html({ ocrResponse }: { ocrResponse: OCRResponse }) {
   const markdown = ocrResponse.pages.map((p) => p.markdown).join("\n\n");
   const images = ocrResponse.pages.map((p) => p.images).flat(2);
-  const imageMap = arrayToRecord(images);
+  const imageMap = keyBy(images, (i) => i.id);
 
   const renderer = new marked.Renderer();
 
@@ -45,12 +46,4 @@ export function Ocr2html({ ocrResponse }: { ocrResponse: OCRResponse }) {
 
   // deno-lint-ignore react-no-danger
   return <div dangerouslySetInnerHTML={{ __html: result }}></div>;
-}
-
-function arrayToRecord<T extends { id: string }>(arr: T[]): Record<string, T> {
-  const record: Record<string, T> = {};
-  for (const item of arr) {
-    record[item.id] = item;
-  }
-  return record;
 }

@@ -19,6 +19,7 @@
   ],
   "imports": {
     "@/": "./",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.41.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
     "@mistralai/mistralai": "npm:@mistralai/mistralai@^1.10.0",
     "@preact/signals": "npm:@preact/signals@^2.3.2",

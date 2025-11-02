@@ -4,6 +4,7 @@
     "jsr:@deno/esbuild-plugin@^1.2.0": "1.2.0",
     "jsr:@deno/loader@~0.3.2": "0.3.9",
     "jsr:@deno/loader@~0.3.3": "0.3.9",
+    "jsr:@es-toolkit/es-toolkit@^1.41.0": "1.41.0",
     "jsr:@fresh/build-id@1": "1.0.1",
     "jsr:@fresh/core@2": "2.1.4",
     "jsr:@fresh/core@^2.1.4": "2.1.4",
@@ -54,6 +55,9 @@
     },
     "@deno/loader@0.3.9": {
       "integrity": "703d44656f7da0fa4a4a7f8a5105b5b41320821286508c2967b4252a00a2506f"
+    },
+    "@es-toolkit/es-toolkit@1.41.0": {
+      "integrity": "4df54a18e80b869880cee8a8a9ff7a5e1c424a9fd0916dccd38d34686f110071"
     },
     "@fresh/build-id@1.0.1": {
       "integrity": "12a2ec25fd52ae9ec68c26848a5696cd1c9b537f7c983c7e56e4fb1e7e816c20",
@@ -1339,6 +1343,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@es-toolkit/es-toolkit@^1.41.0",
       "jsr:@fresh/core@^2.1.4",
       "jsr:@fresh/plugin-vite@^1.0.7",
       "jsr:@std/encoding@^1.0.10",
