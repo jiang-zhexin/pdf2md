@@ -1,5 +1,6 @@
 import { define } from "@/utils.ts";
 import { Footer } from "@/components/footer.tsx";
+import icon from "@/assets/icon.svg";
 
 export default define.page(({ Component }) => {
   return (
@@ -8,13 +9,8 @@ export default define.page(({ Component }) => {
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <title>PDF2MD</title>
-        <link
-          rel="stylesheet"
-          href="https://cdn.simplecss.org/simple.min.css"
-        />
-        <link rel="stylesheet" href="/assets/css/style.css" />
-        <link rel="icon" href="/assets/icon.svg" />
-        <link rel="apple-touch-icon" href="/assets/icon.svg" />
+        <link rel="icon" href={icon} />
+        <link rel="apple-touch-icon" href={icon} />
       </head>
       <body>
         <Component />

@@ -1,16 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- PDF Document Icon (Left Half) -->
+  
   <rect x="5" y="10" width="40" height="80" rx="5" ry="5" fill="#f44336" />
   <polygon points="5,10 15,10 15,20 5,20" fill="#ffffff" />
   <line x1="15" y1="30" x2="35" y2="30" stroke="#ffffff" stroke-width="2" />
   <line x1="15" y1="40" x2="35" y2="40" stroke="#ffffff" stroke-width="2" />
   <line x1="15" y1="50" x2="35" y2="50" stroke="#ffffff" stroke-width="2" />
 
-  <!-- Vertical Separator Line -->
   <line x1="50" y1="5" x2="50" y2="95" stroke="#808080" stroke-width="2" />
 
-  <!-- Markdown Code Icon (Right Half) -->
   <text x="60" y="35" font-family="monospace" font-size="20" fill="#28a745">&lt;/&gt;</text>
-    <text x="65" y="70" font-family="monospace" font-size="30" fill="#007bff">#</text>
+  <text x="65" y="70" font-family="monospace" font-size="30" fill="#007bff">#</text>
 
 </svg>

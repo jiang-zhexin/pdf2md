@@ -18,6 +18,7 @@
     "jsr:@std/html@^1.0.5": "1.0.5",
     "jsr:@std/http@^1.0.21": "1.0.21",
     "jsr:@std/internal@^1.0.10": "1.0.12",
+    "jsr:@std/json@^1.0.2": "1.0.2",
     "jsr:@std/jsonc@^1.0.2": "1.0.2",
     "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/path@1": "1.1.2",
@@ -34,23 +35,29 @@
     "npm:@opentelemetry/api@^1.9.0": "1.9.0",
     "npm:@preact/signals@^2.2.1": "2.3.2_preact@10.27.2",
     "npm:@preact/signals@^2.3.2": "2.3.2_preact@10.27.2",
-    "npm:@prefresh/vite@^2.4.8": "2.4.11_preact@10.27.2_vite@7.1.12__picomatch@4.0.3",
+    "npm:@prefresh/vite@^2.4.8": "2.4.11_preact@10.27.2_vite@7.1.12__picomatch@4.0.3_@types+node@24.2.0",
+    "npm:@types/node@*": "24.2.0",
     "npm:esbuild-wasm@~0.25.11": "0.25.11",
     "npm:esbuild@0.25.7": "0.25.7",
+    "npm:esbuild@~0.25.5": "0.25.7",
     "npm:marked-footnote@^1.4.0": "1.4.0_marked@16.4.1",
     "npm:marked-katex-extension@^5.1.5": "5.1.5_katex@0.16.25_marked@16.4.1",
     "npm:marked@^16.4.1": "16.4.1",
     "npm:preact-render-to-string@^6.6.3": "6.6.3_preact@10.27.2",
     "npm:preact@^10.27.0": "10.27.2",
     "npm:preact@^10.27.2": "10.27.2",
-    "npm:rolldown-vite@^7.1.20": "7.1.20_picomatch@4.0.3_esbuild@0.25.7"
+    "npm:rolldown-vite@^7.1.20": "7.1.20_picomatch@4.0.3_esbuild@0.25.7_@types+node@24.2.0",
+    "npm:rollup@^4.50.0": "4.52.5",
+    "npm:simpledotcss@^2.3.7": "2.3.7",
+    "npm:vite@^7.1.4": "7.1.12_picomatch@4.0.3_@types+node@24.2.0"
   },
   "jsr": {
     "@deno/esbuild-plugin@1.2.0": {
       "integrity": "04ddd0fca9416d8a2866263928a53b9d5ed08dfca064d64504a0aaf9800c709e",
       "dependencies": [
         "jsr:@deno/loader@~0.3.3",
-        "jsr:@std/path@^1.1.1"
+        "jsr:@std/path@^1.1.1",
+        "npm:esbuild@~0.25.5"
       ]
     },
     "@deno/loader@0.3.9": {
@@ -82,8 +89,8 @@
         "jsr:@std/uuid",
         "npm:@opentelemetry/api",
         "npm:@preact/signals@^2.2.1",
-        "npm:esbuild",
         "npm:esbuild-wasm",
+        "npm:esbuild@0.25.7",
         "npm:preact-render-to-string",
         "npm:preact@^10.27.0",
         "npm:preact@^10.27.2"
@@ -101,7 +108,9 @@
         "npm:@babel/core",
         "npm:@babel/preset-react",
         "npm:@mjackson/node-fetch-server",
-        "npm:@prefresh/vite"
+        "npm:@prefresh/vite",
+        "npm:rollup",
+        "npm:vite"
       ]
     },
     "@std/bytes@1.0.6": {
@@ -134,8 +143,14 @@
     "@std/internal@1.0.12": {
       "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
     },
+    "@std/json@1.0.2": {
+      "integrity": "d9e5497801c15fb679f55a2c01c7794ad7a5dfda4dd1bebab5e409cb5e0d34d4"
+    },
     "@std/jsonc@1.0.2": {
-      "integrity": "909605dae3af22bd75b1cbda8d64a32cf1fd2cf6efa3f9e224aba6d22c0f44c7"
+      "integrity": "909605dae3af22bd75b1cbda8d64a32cf1fd2cf6efa3f9e224aba6d22c0f44c7",
+      "dependencies": [
+        "jsr:@std/json"
+      ]
     },
     "@std/media-types@1.1.0": {
       "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
@@ -711,7 +726,19 @@
         "@prefresh/utils",
         "@rollup/pluginutils",
         "preact",
-        "vite"
+        "vite@7.1.12_picomatch@4.0.3"
+      ]
+    },
+    "@prefresh/vite@2.4.11_preact@10.27.2_vite@7.1.12__picomatch@4.0.3_@types+node@24.2.0": {
+      "integrity": "sha512-/XjURQqdRiCG3NpMmWqE9kJwrg9IchIOWHzulCfqg2sRe/8oQ1g5De7xrk9lbqPIQLn7ntBkKdqWXIj4E9YXyg==",
+      "dependencies": [
+        "@babel/core",
+        "@prefresh/babel-plugin",
+        "@prefresh/core",
+        "@prefresh/utils",
+        "@rollup/pluginutils",
+        "preact",
+        "vite@7.1.12_picomatch@4.0.3_@types+node@24.2.0"
       ]
     },
     "@rolldown/binding-android-arm64@1.0.0-beta.45": {
@@ -914,6 +941,12 @@
     },
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
+    },
+    "@types/node@24.2.0": {
+      "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
+      "dependencies": [
+        "undici-types"
+      ]
     },
     "baseline-browser-mapping@2.8.22": {
       "integrity": "sha512-/tk9kky/d8T8CTXIQYASLyhAxR5VwL3zct1oAoVTaOUHwrmsGnfbRwNdEq+vOl2BN8i3PcDdP0o4Q+jjKQoFbQ==",
@@ -1231,6 +1264,28 @@
       ],
       "bin": true
     },
+    "rolldown-vite@7.1.20_picomatch@4.0.3_esbuild@0.25.7_@types+node@24.2.0": {
+      "integrity": "sha512-iXo6JzhBnNl+MY5Wky2Qr4RnB1gLJ3798YUMC3uBXSjCDM/bV+ALcnm5M23eOy9Nldi18aUioLpTB/PtqvwSZQ==",
+      "dependencies": [
+        "@oxc-project/runtime",
+        "@types/node",
+        "esbuild@0.25.7",
+        "fdir",
+        "lightningcss",
+        "picomatch@4.0.3",
+        "postcss",
+        "rolldown",
+        "tinyglobby"
+      ],
+      "optionalDependencies": [
+        "fsevents"
+      ],
+      "optionalPeers": [
+        "@types/node",
+        "esbuild@0.25.7"
+      ],
+      "bin": true
+    },
     "rolldown@1.0.0-beta.45": {
       "integrity": "sha512-iMmuD72XXLf26Tqrv1cryNYLX6NNPLhZ3AmNkSf8+xda0H+yijjGJ+wVT9UdBUHOpKzq9RjKtQKRCWoEKQQBZQ==",
       "dependencies": [
@@ -1291,6 +1346,9 @@
       "integrity": "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==",
       "bin": true
     },
+    "simpledotcss@2.3.7": {
+      "integrity": "sha512-Ag3TpigN7725AnvgwyGkErd50SuYmlDQRU+9LLNHUIK8T4DUEWPHut6GpD1ivxARrBd8eYGTL8vzKazVFYUpQg=="
+    },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
@@ -1303,6 +1361,9 @@
     },
     "tslib@2.8.1": {
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
+    },
+    "undici-types@7.10.0": {
+      "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag=="
     },
     "update-browserslist-db@1.1.4_browserslist@4.27.0": {
       "integrity": "sha512-q0SPT4xyU84saUX+tomz1WLkxUbuaJnR1xWt17M7fJtEJigJeWUNGUqrauFXsHnqev9y9JTRGwk13tFBuKby4A==",
@@ -1325,6 +1386,25 @@
       ],
       "optionalDependencies": [
         "fsevents"
+      ],
+      "bin": true
+    },
+    "vite@7.1.12_picomatch@4.0.3_@types+node@24.2.0": {
+      "integrity": "sha512-ZWyE8YXEXqJrrSLvYgrRP7p62OziLW7xI5HYGWFzOvupfAlrLvURSzv/FyGyy0eidogEM3ujU+kUG1zuHgb6Ug==",
+      "dependencies": [
+        "@types/node",
+        "esbuild@0.25.11",
+        "fdir",
+        "picomatch@4.0.3",
+        "postcss",
+        "rollup",
+        "tinyglobby"
+      ],
+      "optionalDependencies": [
+        "fsevents"
+      ],
+      "optionalPeers": [
+        "@types/node"
       ],
       "bin": true
     },
@@ -1354,7 +1434,8 @@
       "npm:marked-katex-extension@^5.1.5",
       "npm:marked@^16.4.1",
       "npm:preact@^10.27.2",
-      "npm:rolldown-vite@^7.1.20"
+      "npm:rolldown-vite@^7.1.20",
+      "npm:simpledotcss@^2.3.7"
     ]
   }
 }

@@ -1,5 +1,6 @@
 import { define } from "@/utils.ts";
 import { Nav } from "@/components/nav.tsx";
+import icon from "@/assets/icon.svg";
 
 export default define.page(function Home() {
   return (
@@ -7,7 +8,7 @@ export default define.page(function Home() {
       <header>
         <Nav />
         <h1>
-          <img class="icon" src="/assets/icon.svg" />
+          <img class="icon" src={icon} />
           PDF To Markdown
         </h1>
       </header>
