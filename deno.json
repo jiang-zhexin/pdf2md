@@ -22,16 +22,16 @@
     "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.41.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.7",
     "@mistralai/mistralai": "npm:@mistralai/mistralai@^1.10.0",
-    "@preact/signals": "npm:@preact/signals@^2.3.2",
+    "@preact/signals": "npm:@preact/signals@^2.4.0",
     "@std/encoding": "jsr:@std/encoding@^1.0.10",
     "@std/tar": "jsr:@std/tar@^0.1.9",
     "fresh": "jsr:@fresh/core@^2.1.4",
-    "marked": "npm:marked@^16.4.1",
+    "marked": "npm:marked@^16.4.2",
     "marked-footnote": "npm:marked-footnote@^1.4.0",
-    "marked-katex-extension": "npm:marked-katex-extension@^5.1.5",
+    "marked-katex-extension": "npm:marked-katex-extension@^5.1.6",
     "preact": "npm:preact@^10.27.2",
     "simpledotcss": "npm:simpledotcss@^2.3.7",
-    "vite": "npm:rolldown-vite@^7.1.20"
+    "vite": "npm:rolldown-vite@^7.2.2"
   },
   "compilerOptions": {
     "lib": [
