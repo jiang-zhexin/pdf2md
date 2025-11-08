@@ -11,3 +11,8 @@
   stroke: currentColor;
   fill: currentColor;
 }
+
+header nav a[aria-current=true]{
+  color: var(--text);
+  border-color: var(--border);
+}
